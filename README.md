@@ -1,1 +1,1 @@
-# politech-it-frontend
+# polytech-it-frontend

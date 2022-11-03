@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Polytech-it-frontend</title>
+
+  <!-- Fira Sans font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+
+  <!-- Icon -->
+  <link rel="icon" href="public/favicon.ico">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+  <!-- Custom CSS -->
+  <link href="css/index.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.js"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100 text-dark bg-light">
+  <!-- <body class="text-light bg-light"> -->
+
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <div class="container-fluid">
+        <div>
+          <img alt="polytech-it-frontend" src="public/logo.svg">
+          <a class="navbar-brand" href="javascript: void(0)">polytech-it-frontend</a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="./">Employees</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Profile</a>
+            </li>
+          </ul>
+
+          <!-- Sign In button -->
+          <button type="button" class="btn btn-outline-primary" id="login" data-bs-toggle="modal"
+            data-bs-target="#loginModal">Sign In</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="search">
+      <div class="container mt-3">
+        <form class="d-flex" action="" method="get" target="_blank" spellcheck="false" autocomplete="off" role="search">
+          <input class="form-control me-2" type="search" placeholder="Name of employee" aria-label="Search">
+          <button class="btn btn-outline-success" type="button">Search</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="employees">
+      <script type="text/template" id="employeeTemplate">
+          <% employees.forEach(function(employee) { %>
+              <tr id="employee<%= employee.id %>">
+                  <!-- <td class="employeeId"><%= employee.id %></td> -->
+                  <td class="employeeName"><%= employee.first_name %></td>
+                  <td class="employeeSurname"><%= employee.last_name %></td>
+                  <td class="employeePosition"><%= employee.position %></td>
+                  <td class="employeeBirthday"><%= employee.birthday %></td>
+                  <td class="employeeSalary"><%= employee.salary %></td>
+              </tr>
+          <% }); %>
+      </script>
+
+      <div class="container mt-5">
+        <div class="container-fluid">
+          <!-- Employee table -->
+          <table id="employeeTable" class="table table-light table-striped table-hover">
+            <thead class="thead-light">
+              <tr>
+                <!-- <th>Id</th> -->
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Position</th>
+                <th>Birthday</th>
+                <th>Salary</th>
+              </tr>
+            </thead>
+
+            <tbody id="employeeTableBody">
+            </tbody>
+          </table>
+
+    <!-- Table pagination bar -->
+    <div class="container-fluid mt-2"></div>
+      <nav id="employeeNavigation" area-label="Table navigation">
+        <ul class="pagination container d-flex justify-content-center">
+          <li class="page-item mx-1">
+            <a class="page-link bg-light" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only"></span>
+            </a>
+          </li>
+          <li class="page-item mx-1">
+            <a class="page-link bg-lighte" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only"></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Login modal -->
+    <div class="modal fade bg-dark text-dark" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content bg-light">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModalLabel">Sign In</h5>
+            <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form name="login">
+            <div class="mb-3">
+              <label for="inputLogin" class="form-label">Login</label>
+              <input type="text" class="form-control text-light bg-light" id="inputLogin" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="inputPassword" class="form-label">Password</label>
+              <input type="password" class="form-control text-light bg-light" id="inputPassword">
+            </div>
+            <button type="submit" class="btn btn-primary">Sign In</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer mt-auto bg-dark text-light">
+    <div class="container d-flex justify-content-center">
+      <h3 class="text-muted">Polytech 2022</h3>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
+    </script>
+  <!-- Main JS script -->
+  <script src="src/index.js"></script>
+</body>
+
+</html>
